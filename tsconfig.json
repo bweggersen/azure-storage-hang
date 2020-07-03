@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "rootDir": "./src",
+    "outDir": "./lib",
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "inlineSourceMap": false,
+    "composite": false
+  },
+  "include": ["./src"]
+}
