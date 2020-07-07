@@ -129,9 +129,20 @@ async function fetch(cwd: string): Promise<void> {
 
   console.log("Starting 50 concurrent fetch commands using http");
 
+  const to = setTimeout(async () => {
+    console.error("Hang.");
+    process.exit(1);
+  }, 10 * 60 * 1000);
+
   await Promise.all(
-    [...Array(50).keys()].map((i) => fetch(testFolderGenerator(i)))
+    [...Array(50).keys()].map(async (i) => {
+      console.log(`starting #${i}`);
+      await fetch(testFolderGenerator(i));
+      console.log(`done #${i}`);
+    })
   );
 
-  console.log("Done");
+  clearTimeout(to);
+
+  console.log("All done");
 })();
