@@ -48,11 +48,6 @@ async function fetch(cwd: string): Promise<void> {
     "Starting 50 concurrent fetch commands using @azure/storage-blob"
   );
 
-  const to = setTimeout(async () => {
-    console.error("Hang.");
-    process.exit(1);
-  }, 10 * 60 * 1000);
-
   await Promise.all(
     [...Array(50).keys()].map(async (i) => {
       console.log(`starting #${i}`);
@@ -60,8 +55,6 @@ async function fetch(cwd: string): Promise<void> {
       console.log(`done #${i}`);
     })
   );
-
-  clearTimeout(to);
 
   console.log("All done");
 })();
