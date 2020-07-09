@@ -25,11 +25,11 @@ AZURE_STORAGE_ACCOUNT="..." AZURE_STORAGE_CONTAINER="..." AZURE_STORAGE_KEY="...
 
 ## Results
 
-I ran the scripts above five times for each method. On average, 10 download streams would hang with @azure/storage-blob, and 7 would hang with axios.
-
-See raw data in the `logs/` folder.
+I ran the scripts above five times for each method. See the various `*.sh` scripts in the root. Remember to add env variables.
 
 ### @azure/storage-blob
+
+Raw log: logs/azureBlobSDK-results.txt
 
 | Started | Completed |
 | ------- | --------- |
@@ -39,7 +39,12 @@ See raw data in the `logs/` folder.
 | 50      | 35        |
 | 50      | 44        |
 
-### axios
+### http-requests
+
+#### azure blob -> tar extraction -> disk
+
+Blob size: 170 MB
+Raw log: logs/http-results.txt
 
 | Started | Completed |
 | ------- | --------- |
@@ -48,3 +53,31 @@ See raw data in the `logs/` folder.
 | 50      | 45        |
 | 50      | 41        |
 | 50      | 40        |
+
+#### azure blob -> disk
+
+Blob size: 120 MB
+Raw log: logs/http-results-noTar.txt
+
+| Started | Completed |
+| ------- | --------- |
+| 50      | 50        |
+| 50      | 46        |
+| 50      | 50        |
+| 50      | 44        |
+| 50      | 45        |
+
+#### chrome -> disk
+
+In this test, I download Chrome from googleapis.com.
+
+Chrome size: 130 MB
+Raw log: logs/http-results-chrome.txt
+
+| Started | Completed |
+| ------- | --------- |
+| 50      | 50        |
+| 50      | 50        |
+| 50      | 50        |
+| 50      | 50        |
+| 50      | 50        |
