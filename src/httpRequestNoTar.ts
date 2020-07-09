@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as path from "path";
+import * as fs from "fs";
 import * as crypto from "crypto-js";
 import * as URL from "url";
 import * as tarFs from "tar-fs";
@@ -108,13 +109,14 @@ async function fetch(cwd: string): Promise<void> {
       throw new Error("Unable to fetch blob.");
     }
 
-    const tarWritableStream = tarFs.extract(cwd);
+    fs.mkdirSync(cwd, { recursive: true });
+    const fsStream = fs.createWriteStream(path.join(cwd, `blob.tar`));
 
-    blobReadableStream.pipe(tarWritableStream);
+    blobReadableStream.pipe(fsStream);
 
     const blobPromise = new Promise((resolve, reject) => {
-      tarWritableStream.on("finish", () => resolve());
-      tarWritableStream.on("error", (error) => reject(error));
+      fsStream.on("finish", () => resolve());
+      fsStream.on("error", (error) => reject(error));
     });
 
     await blobPromise;
@@ -125,7 +127,7 @@ async function fetch(cwd: string): Promise<void> {
 
 (async () => {
   const testFolderGenerator = (i: number) =>
-    path.join(__dirname, "..", "testFolder", "httpRequest", i.toString());
+    path.join(__dirname, "..", "testFolder", "httpRequestNoTar", i.toString());
 
   console.log("Starting 50 concurrent fetch commands using http");
 
