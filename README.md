@@ -9,18 +9,18 @@ yarn install
 yarn build
 ```
 
-Find a large Azure Storage Blob (I tested with a blob which contained lots of files and totalled 170 MB), and run the scripts below to start 50 concurrent downloads of the same blob. It times out after 10 minutes, so if your network connection is a little slower, you might want to increase that.
+Find a large Azure Storage Blob (I tested with a blob which contained lots of files and totalled 170 MB), and run the scripts below to start 50 concurrent downloads of the same blob. It times out after 30 minutes.
 
-### To test using @azure/storage-blob:
+### Test using @azure/storage-blob:
 
 ```
 AZURE_STORAGE_CONTAINER="..." AZURE_STORAGE_CONNECTION_STRING="..." AZURE_BLOB_NAME="..." node lib/azureBlobSDK.js
 ```
 
-### To test using axios:
+### Test without the @azure/storage-blob (sending a raw http request):
 
 ```
-AZURE_STORAGE_ACCOUNT="..." AZURE_STORAGE_CONTAINER="..." AZURE_STORAGE_KEY="...." AZURE_BLOB_NAME="..." node lib/httpRequest.js
+AZURE_STORAGE_ACCOUNT="..." AZURE_STORAGE_CONTAINER="..." AZURE_STORAGE_KEY="...." AZURE_BLOB_NAME="..." node lib/httpRequestNoTar.js
 ```
 
 ## Results
