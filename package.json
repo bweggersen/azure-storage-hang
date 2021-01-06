@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@azure/storage-blob": "^12.1.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "crypto-js": "^4.0.0",
     "tar-fs": "^2.1.0",
     "typescript": "^3.9.6"
